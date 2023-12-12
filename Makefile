@@ -22,10 +22,11 @@ SRCS = ./src/main.c \
 		./src/scene/scene.c \
 		./src/trace/ray/ray.c \
 		./src/utils/vec3_utils.c \
-		./src/trace/hit/hit_sphere.c \
+		./src/trace/hit/hit_objs.c \
+		./src/trace/hit/hit.c \
 		./src/scene/object_create.c \
 		./src/trace/hit/normal.c \
-		#./src/utils/object_utils.c \
+		./src/utils/object_utils.c \
 		./src/trace/ray/phong_lighting.c \
 
 OBJS = $(SRCS:.c=.o)

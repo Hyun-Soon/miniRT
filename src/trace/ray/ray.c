@@ -29,14 +29,21 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 	return(ray);
 }
 
+t_hit_record	record_init()
+{
+	t_hit_record record;
+
+	record.tmin = EPSILON;
+	record.tmax = INFINITY;
+	return (record);
+}
+
 //광선이 최종적으로 얻게 된 픽셀의 색상 값을 리턴
-t_color3	ray_color(t_ray *r, t_sphere *sphere)
+t_color3	ray_color(t_scene *scene)
 {
 	double	t;
-	t_hit_record rec;
 
-	rec.tmin = 0;
-	rec.tmax = INFINITY;
+	scene->rec = record_init();
 	//t = hit_sphere(sphere, r);
 	//if (t > 0.0)
 	//{
@@ -44,9 +51,9 @@ t_color3	ray_color(t_ray *r, t_sphere *sphere)
 	//	n = vunit(vminus(ray_at(r, t), sphere->center));
 	//	return (vmult(color3(n.x + 1, n.y + 1, n.z + 1), 0.5));
 	//}
-	if (hit_sphere(sphere, r, &rec))
-		return (vmult(vplus(rec.normal, color3(1, 1, 1)), 0.5));
-	t = 0.5 * (r->dir.y + 1.0);
+	if (hit(scene->world, &scene->ray, &scene->rec))
+		return (phong_lighting(scene));
+	t = 0.5 * (scene->ray.dir.y + 1.0);
 	//(1-t) * white + t * skyblue
-	return (vplus(vmult(color3(1, 1, 1), 1.0 - t), vmult(color3(0, 0, 0), t)));
+	return (vplus(vmult(color3(1, 1, 1), 1.0 - t), vmult(color3(0.3, 0.3, 0), t)));
 }
