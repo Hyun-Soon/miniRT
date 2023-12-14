@@ -52,8 +52,8 @@ t_color3	point_light_get(t_scene *scene, t_light *light)
 	//specular
 	view_dir = vmult(scene->ray.dir, -1);
 	reflect_dir = reflect(light_dir, scene->rec.normal);
-	ksn = 64;
-	ks = 0.5;
+	ksn = 128;
+	ks = 0.8;
 	spec = pow(fmax(vdot(view_dir, reflect_dir), 0.0), ksn);
 	specular = vmult(vmult(light->light_color, ks), spec);
 	brightness = light->bright_ratio * LUMEN;

@@ -85,5 +85,35 @@ t_bool hit_cylinder(t_object *sb_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_cylinder *cy = sb_obj->element;
 
+	t_vec3	D_xz = vec3(ray->dir.x, 0, ray->dir.z);
+	t_vec3	C_xz = vec3(ray->org.x, 0, ray->org.z);
+	t_vec3	Pos_xz = vec3(cy->pos.x, 0, cy->pos.z);
+	t_vec3	A = vminus(C_xz, Pos_xz);
+
+	double	a = vdot(D_xz, D_xz);
+	double	b_prime = vdot(D_xz, A);
+	double	c = vdot(A, A) - cy->r * cy->r;
+	double discriminant = b_prime * b_prime - a * c;
+	double	t;
+	t_point3 isp;
 	
+	if (discriminant < 0)
+		return (FALSE);
+	t = (-b_prime - sqrt(discriminant)) / a;
+	isp = vplus(ray->org, vmult(ray->dir, t));
+
+	if (t < rec->tmin || rec->tmax < t || isp.y < cy->pos.y || isp.y > cy->pos.y + cy->h)
+	{
+		t = (-b_prime + sqrt(b_prime * b_prime - a * c)) / a;
+		isp = vplus(ray->org, vmult(ray->dir, t));
+		if (t < rec->tmin || rec->tmax < t || isp.y < cy->pos.y || isp.y > cy->pos.y + cy->h)
+			return (FALSE);
+	}
+
+	rec->t = t;
+	rec->p = ray_at(ray, t);
+	rec->normal = vunit(vminus(vplus(ray->org, vmult(ray->dir, t)), vec3(cy->pos.x, isp.y, cy->pos.z)));
+	rec->albedo = sb_obj->albedo;
+	set_face_normal(ray, rec);
+	return (TRUE);
 }

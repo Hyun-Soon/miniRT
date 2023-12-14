@@ -1,0 +1,6 @@
+{
+	"files.associations": {
+		"scene.h": "c",
+		"trace.h": "c"
+	}
+}

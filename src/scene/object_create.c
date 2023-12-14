@@ -37,6 +37,20 @@ t_plane	*plane(t_point3 pos, t_vec3 n)
 	return (pl);
 }
 
+t_cylinder *cylinder(t_point3 pos, t_vec3 n, double d, double h)
+{
+	t_cylinder *cy;
+
+	if (!(cy = (t_cylinder *)malloc(sizeof(t_cylinder))))
+		return (NULL);
+	cy->pos = pos;
+	cy->n = n;
+	cy->diameter = d;
+	cy->r = d / 2;
+	cy->h = h;
+	return (cy);
+}
+
 t_light	*light_point(t_point3 light_org, t_color3 light_color, double bright_ratio)
 {
 	t_light *light;
