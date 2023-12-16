@@ -55,5 +55,5 @@ t_color3	ray_color(t_scene *scene)
 		return (phong_lighting(scene));
 	t = 0.5 * (scene->ray.dir.y + 1.0);
 	//(1-t) * white + t * skyblue
-	return (vplus(vmult(color3(1, 1, 1), 1.0 - t), vmult(color3(0.3, 0.3, 0), t)));
+	return (vplus(vmult(color3(1, 1, 1), 1.0 - t), vmult(color3(0.2, 0.3, 0.6), t)));
 }

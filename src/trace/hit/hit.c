@@ -32,5 +32,9 @@ t_bool	hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 		hit_result = hit_plane(world, ray, rec);
 	else if (world->type == CY)
 		hit_result = hit_cylinder(world, ray, rec);
+	else if (world->type == DSK)
+		hit_result = hit_disk(world, ray, rec);
+	else if (world->type == CN)
+		hit_result = hit_cone(world, ray, rec);
 	return (hit_result);
 }

@@ -7,7 +7,7 @@ t_camera	camera(t_canvas *canvas, t_point3 org)
 	double	viewport_height;
 
 	viewport_height = 2.0;
-	focal_len = 1.0;
+	focal_len = 2;
 	cam.org = org;
 	cam.viewport_h = viewport_height;
 	cam.viewport_w = viewport_height * canvas->aspect_ratio;

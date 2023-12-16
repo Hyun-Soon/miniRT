@@ -44,11 +44,38 @@ t_cylinder *cylinder(t_point3 pos, t_vec3 n, double d, double h)
 	if (!(cy = (t_cylinder *)malloc(sizeof(t_cylinder))))
 		return (NULL);
 	cy->pos = pos;
-	cy->n = n;
+	cy->n = vunit(n);
 	cy->diameter = d;
 	cy->r = d / 2;
 	cy->h = h;
 	return (cy);
+}
+
+t_disk *disk(t_point3 pos, t_vec3 n, double r)
+{
+	t_disk *dsk;
+
+	if (!(dsk = (t_disk *)malloc(sizeof(t_disk))))
+		return (NULL);
+
+	dsk->pos = pos;
+	dsk->n = vunit(n);
+	dsk->r = r;
+	return (dsk);
+}
+
+t_cone *cone(t_point3 pos, t_vec3 n, double r, double h)
+{
+	t_cone *cone;
+
+	if (!(cone = (t_cone *)malloc(sizeof(t_cone))))
+		return (NULL);
+	
+	cone->pos = pos;
+	cone->n = vunit(n);
+	cone->r = r;
+	cone->h = h;
+	return (cone);
 }
 
 t_light	*light_point(t_point3 light_org, t_color3 light_color, double bright_ratio)

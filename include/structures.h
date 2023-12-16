@@ -10,6 +10,8 @@ typedef struct s_canvas t_canvas;
 typedef struct s_sphere t_sphere;
 typedef struct s_plane t_plane;
 typedef struct s_cylinder t_cylinder;
+typedef struct s_disk t_disk;
+typedef struct s_cone t_cone;
 typedef struct s_hit_record t_hit_record;
 typedef struct s_object t_object;
 typedef struct s_light t_light;
@@ -24,6 +26,8 @@ typedef int t_object_type;
 # define LIGHT_POINT 1
 # define PL 2
 # define CY 3
+# define DSK 4
+# define CN 5
 
 # define EPSILON 1e-6 //0.000001
 # define LUMEN 3
@@ -77,6 +81,21 @@ struct s_cylinder
 	t_point3	pos;
 	t_vec3		n;
 	double		diameter;
+	double		r;
+	double		h;
+};
+
+struct s_disk
+{
+	t_point3	pos;
+	t_vec3		n;
+	double		r;
+};
+
+struct s_cone
+{
+	t_point3	pos;
+	t_vec3		n;
 	double		r;
 	double		h;
 };
